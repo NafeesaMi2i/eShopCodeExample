@@ -16,11 +16,8 @@
         <a href="https://github.com/dotnet-architecture/eShopOnWeb" target="_blank" class="ml-md-auto">About eShopOnWeb</a>
     </div>
 
-    <div class="content px-4">
-        <Toast></Toast>
-        @Body
-    </div>
-</div>
+// Content structure adapted for new front-end framework
+// TODO: Implement toast notifications and dynamic content rendering
     @code
 {
         protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -28,7 +25,6 @@
             if (firstRender)
             {
                 var authState = await AuthStateProvider.GetAuthenticationStateAsync();
-
                 if (authState.User == null)
                 {
                     await new Route(JSRuntime).RouteOutside("/Identity/Account/Login");

@@ -1,0 +1,51 @@
+package com.eshop.backend.controllers;
+
+import com.eshop.backend.services.CatalogItemService;
+import com.eshop.backend.models.CatalogItem;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/catalog")
+public class CatalogItemController {
+
+    private final CatalogItemService catalogItemService;
+
+    @Autowired
+    public CatalogItemController(CatalogItemService catalogItemService) {
+        this.catalogItemService = catalogItemService;
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<CatalogItem> getCatalogItemById(@PathVariable Long id) {
+        CatalogItem catalogItem = catalogItemService.findById(id);
+        return ResponseEntity.ok(catalogItem);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<CatalogItem>> getAllCatalogItems() {
+        List<CatalogItem> catalogItems = catalogItemService.findAll();
+        return ResponseEntity.ok(catalogItems);
+    }
+
+    @PostMapping
+    public ResponseEntity<CatalogItem> createCatalogItem(@RequestBody CatalogItem catalogItem) {
+        CatalogItem createdCatalogItem = catalogItemService.create(catalogItem);
+        return ResponseEntity.ok(createdCatalogItem);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<CatalogItem> updateCatalogItem(@PathVariable Long id, @RequestBody CatalogItem catalogItem) {
+        CatalogItem updatedCatalogItem = catalogItemService.update(id, catalogItem);
+        return ResponseEntity.ok(updatedCatalogItem);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteCatalogItem(@PathVariable Long id) {
+        catalogItemService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+}

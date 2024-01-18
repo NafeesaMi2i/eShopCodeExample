@@ -1,0 +1,50 @@
+package com.eshop.backend.services;
+
+import com.eshop.backend.repositories.CatalogItemRepository;
+import com.eshop.backend.models.CatalogItem;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class CatalogItemService {
+
+    private final CatalogItemRepository catalogItemRepository;
+
+    @Autowired
+    public CatalogItemService(CatalogItemRepository catalogItemRepository) {
+        this.catalogItemRepository = catalogItemRepository;
+    }
+
+    public CatalogItem findById(Long id) {
+        Optional<CatalogItem> catalogItem = catalogItemRepository.findById(id);
+        if (!catalogItem.isPresent()) {
+            throw new ResourceNotFoundException("CatalogItem not found with id: " + id);
+        }
+        return catalogItem.get();
+    }
+
+    public List<CatalogItem> findAll() {
+        return catalogItemRepository.findAll();
+    }
+
+    public CatalogItem create(CatalogItem catalogItem) {
+        return catalogItemRepository.save(catalogItem);
+    }
+
+    public CatalogItem update(Long id, CatalogItem catalogItem) {
+        if (!catalogItemRepository.existsById(id)) {
+            throw new ResourceNotFoundException("CatalogItem not found with id: " + id);
+        }
+        catalogItem.setId(id);
+        return catalogItemRepository.save(catalogItem);
+    }
+
+    public void delete(Long id) {
+        if (!catalogItemRepository.existsById(id)) {
+            throw new ResourceNotFoundException("CatalogItem not found with id: " + id);
+        }
+        catalogItemRepository.deleteById(id);
+    }
+}
