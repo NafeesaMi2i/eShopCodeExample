@@ -1,3 +1,6 @@
+/// <summary>
+/// Contains unit tests for the BaseEntity class.
+/// </summary>
 using NUnit.Framework;
 using Microsoft.eShopWeb.ApplicationCore.Entities;
 
@@ -17,6 +20,12 @@ namespace Microsoft.eShopWeb.ApplicationCore.Entities
 
             baseEntity.Id = int.MinValue;
             Assert.AreEqual(int.MinValue, baseEntity.Id);
+        }
+    }
+}
+        }
+    }
+}
         }
     }
 }
