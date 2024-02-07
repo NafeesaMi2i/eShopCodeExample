@@ -12,7 +12,7 @@ A list of Frequently Asked Questions about this repository can be found [here](h
 
 ## eBook
 
-This reference application is meant to support the free .PDF download ebook: [Architecting Modern Web Applications with ASP.NET Core and Azure](https://aka.ms/webappebook), updated to **ASP.NET Core 8.0**. [Also available in ePub/mobi formats](https://dotnet.microsoft.com/learn/web/aspnet-architecture).
+This reference application is meant to support the free .PDF download ebook: [Architecting Modern Web Applications with ASP.NET Core and Azure](https://aka.ms/webappebook), updated to **.NET 6.0 LTS**. [Also available in ePub/mobi formats](https://dotnet.microsoft.com/learn/web/aspnet-architecture).
 
 You can also read the book in online pages at the .NET docs here: 
 https://docs.microsoft.com/dotnet/architecture/modern-web-apps-azure/
@@ -150,7 +150,7 @@ Learn more about using the dev container in its [readme](/.devcontainer/devconta
 
 ## Running the sample using Docker
 
-You can run the Web sample by running these commands from the root folder (where the .sln file is located):
+You can run the Web sample by running these commands from the root folder (where the .sln file is located), ensuring you update the Docker commands to use .NET 6.0 SDK and runtime images:
 
 ```
 docker-compose build
@@ -159,7 +159,7 @@ docker-compose up
 
 You should be able to make requests to localhost:5106 for the Web project, and localhost:5200 for the Public API project once these commands complete. If you have any problems, especially with login, try from a new guest or incognito browser instance.
 
-You can also run the applications by using the instructions located in their `Dockerfile` file in the root of each project. Again, run these commands from the root of the solution (where the .sln file is located).
+In the Dockerfiles, change any reference to .NET 8.0 SDK or runtime images to their .NET 6.0 counterparts. For example, replace "FROM mcr.microsoft.com/dotnet/aspnet:8.0" with "FROM mcr.microsoft.com/dotnet/aspnet:6.0" for the runtime image, and "FROM mcr.microsoft.com/dotnet/sdk:8.0" with "FROM mcr.microsoft.com/dotnet/sdk:6.0" for the SDK image. Run these updated commands from the root of the solution (where the .sln file is located).
 
 ## Community Extensions
 
